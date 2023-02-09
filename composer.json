@@ -31,8 +31,7 @@
         "symfony/polyfill-intl-icu": "~1.0",
         "symfony/polyfill-mbstring": "~1.0",
         "symfony/polyfill-php56": "~1.0",
-        "symfony/polyfill-php70": "~1.6",
-        "laminas/laminas-zendframework-bridge": "1.6.x-dev"
+        "symfony/polyfill-php70": "~1.6"
     },
     "replace": {
         "symfony/asset": "self.version",
