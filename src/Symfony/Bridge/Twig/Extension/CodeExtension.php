@@ -177,7 +177,7 @@ class CodeExtension extends AbstractExtension
         $line = (int) $line;
 
         if (null === $text) {
-            if (null !== $rel = $this->getFileRelative($file)) {
+            if (null !== $rel = $this->getFileLink($file)) {
                 $rel = explode('/', htmlspecialchars($rel, \ENT_COMPAT | \ENT_SUBSTITUTE, $this->charset), 2);
                 $text = sprintf('<abbr title="%s%2$s">%s</abbr>%s', htmlspecialchars($this->rootDir, \ENT_COMPAT | \ENT_SUBSTITUTE, $this->charset), $rel[0], '/'.($rel[1] ?? ''));
             } else {
