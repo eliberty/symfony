@@ -177,7 +177,7 @@ class CodeExtension extends AbstractExtension
         $line = (int) $line;
 
         if (null === $text) {
-            if (null !== $rel = $this->getFileLink($file)) {
+            if (null !== $rel = $this->getFileRelative($file)) {
                 $rel = explode('/', htmlspecialchars($rel, \ENT_COMPAT | \ENT_SUBSTITUTE, $this->charset), 2);
                 $text = sprintf('<abbr title="%s%2$s">%s</abbr>%s', htmlspecialchars($this->rootDir, \ENT_COMPAT | \ENT_SUBSTITUTE, $this->charset), $rel[0], '/'.($rel[1] ?? ''));
             } else {
@@ -196,6 +196,17 @@ class CodeExtension extends AbstractExtension
         }
 
         return $text;
+    }
+
+    private function getFileRelative(string $file): ?string
+    {
+        $file = str_replace('\\', '/', $file);
+
+        if (null !== $this->rootDir && str_starts_with($file, $this->rootDir)) {
+            return ltrim(substr($file, \strlen($this->rootDir)), '/');
+        }
+
+        return null;
     }
 
     /**
