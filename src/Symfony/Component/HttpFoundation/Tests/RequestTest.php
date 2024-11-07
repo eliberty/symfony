@@ -12,6 +12,7 @@
 namespace Symfony\Component\HttpFoundation\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -281,6 +282,30 @@ class RequestTest extends TestCase
         $request = Request::create('http://test.com/foo#bar');
         $request->server->set('REQUEST_URI', 'http://test.com/foo#bar');
         $this->assertEquals('http://test.com/foo', $request->getUri());
+    
+        $request = Request::create('http://test.com/foo?bar=f\\o');
+        $this->assertEquals('http://test.com/foo?bar=f%5Co', $request->getUri());
+        $this->assertEquals('/foo', $request->getPathInfo());
+        $this->assertEquals('bar=f%5Co', $request->getQueryString());
+    }
+
+    /**
+     * @testWith ["http://foo.com\\bar"]
+     *           ["\\\\foo.com/bar"]
+     *           ["a\rb"]
+     *           ["a\nb"]
+     *           ["a\tb"]
+     *           ["\u0000foo"]
+     *           ["foo\u0000"]
+     *           [" foo"]
+     *           ["foo "]
+     *           [":"]
+     */
+    public function testCreateWithBadRequestUri(string $uri)
+    {
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessage('Invalid URI');
+        Request::create($uri);
     }
 
     /**
