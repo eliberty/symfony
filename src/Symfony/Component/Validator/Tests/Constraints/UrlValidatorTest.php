@@ -63,6 +63,18 @@ class UrlValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
+    /**
+     * @dataProvider getValidUrls
+     */
+    public function testValidUrlsWithNewLine($url)
+    {
+        $this->validator->validate($url."\n", new Url());
+        $this->buildViolation('This value is not a valid URL.')
+            ->setParameter('{{ value }}', '"'.$url."\n".'"')
+            ->setCode(Url::INVALID_URL_ERROR)
+            ->assertRaised();
+    }
+
     public function getValidUrls()
     {
         return [
