@@ -63,7 +63,7 @@ class UniqueEntityValidatorTest extends ConstraintValidatorTestCase
 
     protected $repositoryFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->repositoryFactory = new TestRepositoryFactory();
 

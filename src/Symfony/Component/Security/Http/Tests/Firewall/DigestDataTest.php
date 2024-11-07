@@ -163,7 +163,7 @@ class DigestDataTest extends TestCase
         $this->assertFalse($digestAuth->isNonceExpired());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         class_exists('Symfony\Component\Security\Http\Firewall\DigestAuthenticationListener', true);
     }

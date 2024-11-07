@@ -36,7 +36,7 @@ class GetSetMethodNormalizerTest extends TestCase
      */
     private $serializer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->serializer = $this->getMockBuilder(SerializerNormalizer::class)->getMock();
         $this->normalizer = new GetSetMethodNormalizer();

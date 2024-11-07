@@ -22,7 +22,7 @@ class ResolveParameterPlaceHoldersPassTest extends TestCase
     private $container;
     private $fooDefinition;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->compilerPass = new ResolveParameterPlaceHoldersPass();
         $this->container = $this->createContainerBuilder();

@@ -30,7 +30,7 @@ class ProcessTest extends TestCase
     private static $sigchild;
     private static $notEnhancedSigchild = false;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $phpBin = new PhpExecutableFinder();
         self::$phpBin = getenv('SYMFONY_PROCESS_PHP_TEST_BINARY') ?: ('phpdbg' === \PHP_SAPI ? 'php' : $phpBin->find());
@@ -40,7 +40,7 @@ class ProcessTest extends TestCase
         self::$sigchild = false !== strpos(ob_get_clean(), '--enable-sigchild');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (self::$process) {
             self::$process->stop(0);

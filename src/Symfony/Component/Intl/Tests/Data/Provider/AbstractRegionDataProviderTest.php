@@ -285,7 +285,7 @@ abstract class AbstractRegionDataProviderTest extends AbstractDataProviderTest
     protected $dataProvider;
     private $defaultLocale;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -297,7 +297,7 @@ abstract class AbstractRegionDataProviderTest extends AbstractDataProviderTest
         $this->defaultLocale = \Locale::getDefault();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

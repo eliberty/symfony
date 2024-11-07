@@ -49,7 +49,7 @@ abstract class AbstractValidatorTest extends TestCase
      */
     public $referenceMetadata;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->metadataFactory = new FakeMetadataFactory();
         $this->metadata = new ClassMetadata(self::ENTITY_CLASS);
@@ -59,7 +59,7 @@ abstract class AbstractValidatorTest extends TestCase
         $this->metadataFactory->addMetadata(new ClassMetadata(self::LAZY_PROPERTY));
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->metadataFactory = null;
         $this->metadata = null;
