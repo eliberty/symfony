@@ -339,7 +339,7 @@ class Request
      * @param string|resource|null $content    The raw body data
      *
      * @return static
-     * 
+     *
      * @throws BadRequestException When the URI is invalid
      */
     public static function create($uri, $method = 'GET', $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
@@ -2027,12 +2027,11 @@ class Request
         }
 
         $pathInfo = substr($requestUri, \strlen($baseUrl));
-        if (false === $pathInfo || '' === $pathInfo) {
-            // If substr() returns false then PATH_INFO is set to an empty string
-            return '/';
+        if (false === $pathInfo || '' === $pathInfo || '/' !== $pathInfo[0]) {
+            return '/'.$pathInfo;
         }
 
-        return (string) $pathInfo;
+        return $pathInfo;
     }
 
     /**
